@@ -5,6 +5,8 @@ describe('regex', function () {
     const f = require('../lib/capture')
 
     assert.equal(f('x=5'), '5', 'x=5')
+    assert.equal(f('xx=5'), null, 'x=5')
+    assert.equal(f('abcx=5a'), null, 'x=5')
     assert.equal(f('abc x=5'), '5', 'abc x=5')
     assert.equal(f('x=abc'), null, 'x=abc')
     assert.equal(f('beep x=123123 boop'), '123123', 'beep x=123123 boop')
@@ -22,7 +24,7 @@ describe('regex', function () {
     assert.equal(f('beep x=123123 boop'), '123123', 'beep x=123123 boop')
   })
 
-  it(`匹配8位 hex 代码，以'0x'开头，后面跟着两个字符可以是大写'A-F'，小写'a-f'，或者任意数字`, function () {
+  it.only(`匹配8位 hex 代码，以'0x'开头，后面跟着两个字符可以是大写'A-F'，小写'a-f'，或者任意数字`, function () {
     const f = require('../lib/quantified_group')
 
     assert.ok(
@@ -64,6 +66,7 @@ describe('regex', function () {
       '"beep boop" whatever "tacos" eleven "eighty"'
     )
     assert.deepEqual(f('empty ""'), ['""'], 'empty ""')
+    assert.deepEqual(f("'abc' dd 'ee'"), ["'abc'", "'ee'"], "'abc' dd 'ee'")
   })
 
   it(`将'@@...@@'markdown语法变成'<blink>...</blink>'`, function () {
