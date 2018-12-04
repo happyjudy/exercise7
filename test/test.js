@@ -24,7 +24,7 @@ describe('regex', function () {
     assert.equal(f('beep x=123123 boop'), '123123', 'beep x=123123 boop')
   })
 
-  it.only(`匹配8位 hex 代码，以'0x'开头，后面跟着两个字符可以是大写'A-F'，小写'a-f'，或者任意数字`, function () {
+  it(`匹配8位 hex 代码，以'0x'开头，后面跟着两个字符可以是大写'A-F'，小写'a-f'，或者任意数字`, function () {
     const f = require('../lib/quantified_group')
 
     assert.ok(
